@@ -61,10 +61,12 @@ class SortingArray {
         this.arr[j].x = tempX
 
         // swapping the elements position in the array
-        console.log('hello, im after vis')
+        console.log('hello, im swapping')
         let temp = this.arr[i]
         this.arr[i] = this.arr[j]
         this.arr[j] = temp
+
+        await sleep(5000)
     }
 
     async selectionSort() {
@@ -79,12 +81,17 @@ class SortingArray {
             }
 
             // swap
-            this.swap(min_idx, i)
+            await this.swap(min_idx, i)
+            console.log('swapped!')
         }
     }
 }
 
 const sortingArr = new SortingArray()
+
+let sleep = (ms) => {
+    return new Promise(r => setTimeout(r, ms))
+}
 
 let init = () => {
 
