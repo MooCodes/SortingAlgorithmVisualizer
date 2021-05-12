@@ -18,7 +18,7 @@ class Ele {
     draw() {
         // c.fillStyle = "#FF0000"
         // c.fillRect(this.x, this.y, 40, this.val)
-        c.strokeStyle = "black"
+        c.strokeStyle = "white"
         c.strokeRect(this.x, this.y, 40, this.val)
     }
 
@@ -45,11 +45,15 @@ class SortingArray {
 
     // creates array of Ele's
     generateEleArray = () => Array(20).fill().map((x, i) => {
-        return new Ele(Math.round(Math.random() * (200 - 25) + 25), i * 40)
+        return new Ele(Math.round(Math.random() * (300 - 25) + 25), i * 40)
     })
 
     // draw each ele in the array
     draw() {
+        // clear the screen
+        c.clearRect(0, 0, canvas.width, canvas.height)
+
+        // draw the array
         this.arr.forEach(ele => ele.draw())
     }
 
@@ -60,13 +64,17 @@ class SortingArray {
         this.arr[i].x = this.arr[j].x
         this.arr[j].x = tempX
 
+        let m = 0
+
         // swapping the elements position in the array
         console.log('hello, im swapping')
         let temp = this.arr[i]
         this.arr[i] = this.arr[j]
         this.arr[j] = temp
 
-        await sleep(5000)
+        await sleep(500)
+
+        sortingArr.draw()
     }
 
     async selectionSort() {
@@ -84,6 +92,8 @@ class SortingArray {
             await this.swap(min_idx, i)
             console.log('swapped!')
         }
+
+        console.log('finished sorting')
     }
 }
 
@@ -94,21 +104,11 @@ let sleep = (ms) => {
 }
 
 let init = () => {
-
-}
-
-let update = () => {
-    requestAnimationFrame(update)
-
-    c.clearRect(0, 0, canvas.width, canvas.height)
-
-    // draw the array
     sortingArr.draw()
 }
 
 let runSort = () => {
     init()
-    update()
 }
 
 sortBtn.addEventListener('click', () => {
