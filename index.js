@@ -13,12 +13,13 @@ class Ele {
         this.height = val // the height of each ele
         this.x = x
         this.y = 0
+        this.color = 'white'
     }
     
     draw() {
         // c.fillStyle = "#FF0000"
         // c.fillRect(this.x, this.y, 40, this.val)
-        c.strokeStyle = "white"
+        c.strokeStyle = this.color
         c.strokeRect(this.x, this.y, 40, this.val)
     }
 
@@ -64,17 +65,16 @@ class SortingArray {
         this.arr[i].x = this.arr[j].x
         this.arr[j].x = tempX
 
-        let m = 0
-
         // swapping the elements position in the array
         console.log('hello, im swapping')
         let temp = this.arr[i]
         this.arr[i] = this.arr[j]
         this.arr[j] = temp
 
-        await sleep(500)
-
         sortingArr.draw()
+
+        await sleep(250)
+
     }
 
     async selectionSort() {
@@ -93,7 +93,7 @@ class SortingArray {
             console.log('swapped!')
         }
 
-        console.log('finished sorting')
+        console.log('finished selection sort')
     }
 }
 
