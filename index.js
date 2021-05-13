@@ -65,15 +65,24 @@ class SortingArray {
         this.arr[i].x = this.arr[j].x
         this.arr[j].x = tempX
 
+        // swap colors
+        // let tempColor = this.arr[i].color
+        // this.arr[i].color = this.arr[j].color
+        // this.arr[j].color = tempColor
+
         // swapping the elements position in the array
         console.log('hello, im swapping')
         let temp = this.arr[i]
         this.arr[i] = this.arr[j]
         this.arr[j] = temp
 
-        sortingArr.draw()
+        this.draw()
 
-        await sleep(250)
+        await sleep(50)
+
+        this.arr[i].color = 'white'
+        this.arr[j].color = 'green'
+        this.draw()
 
     }
 
@@ -82,18 +91,54 @@ class SortingArray {
 
         for (i = 0; i < this.arr.length - 1; i++) {
             min_idx = i
+
+            // change color of outer loop ele
+            this.arr[i].color = 'yellow'
+            this.draw()
+
             for (j = i + 1; j < this.arr.length; j++) {
-                //console.log(this.arr[j], this.arr[min_idx])
-                if (this.arr[j].val < this.arr[min_idx].val)
+
+                // set the previous ele color as white
+                // if it isn't the ele we're looking at in the outer loop
+                // and the element isn't currently our min_indx
+                if (i != j - 1 && this.arr[j-1].color !== 'blue')
+                    this.arr[j-1].color = 'white'
+
+                this.arr[j].color = 'red'
+                this.draw()
+
+                await sleep(50)
+
+                // found smallest ele in subarray
+                if (this.arr[j].val < this.arr[min_idx].val) {
+                    if (i === min_idx) {
+                        this.arr[j].color = 'blue'
+                        this.draw()
+                    } else {
+                        this.arr[min_idx].color = 'white'
+                        this.arr[j].color = 'blue'
+                        this.draw()
+                    }
+
                     min_idx = j
+                }
             }
+
+            // set the last element color as white
+            this.arr[this.arr.length - 1].color = 'white'
+            this.draw()
 
             // swap
             await this.swap(min_idx, i)
             console.log('swapped!')
+
         }
 
         console.log('finished selection sort')
+
+        // set the last element color as sorted color
+        this.arr[this.arr.length - 1].color = 'green'
+        this.draw()
     }
 }
 
