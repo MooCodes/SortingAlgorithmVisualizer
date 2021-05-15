@@ -15,7 +15,7 @@ class Ele {
         this.y = 0
         this.color = 'white'
     }
-    
+ 
     draw() {
         // c.fillStyle = "#FF0000"
         // c.fillRect(this.x, this.y, 40, this.val)
@@ -98,10 +98,10 @@ class SortingArray {
 
             for (j = i + 1; j < this.arr.length; j++) {
 
-                // set the previous ele color as white
-                // if it isn't the ele we're looking at in the outer loop
-                // and the element isn't currently our min_indx
-                if (i != j - 1 && this.arr[j-1].color !== 'blue')
+                // reset the previous ele color as white
+                // but only if it isn't the ele that we're looking at in the outer loop
+                // and if it isn't our min_indx
+                if (j - 1 !== i && j - 1 !== min_idx)
                     this.arr[j-1].color = 'white'
 
                 this.arr[j].color = 'red'
@@ -111,6 +111,7 @@ class SortingArray {
 
                 // found smallest ele in subarray
                 if (this.arr[j].val < this.arr[min_idx].val) {
+                    // set appropriate colors
                     if (i === min_idx) {
                         this.arr[j].color = 'blue'
                         this.draw()
@@ -120,8 +121,10 @@ class SortingArray {
                         this.draw()
                     }
 
+                    // update new min
                     min_idx = j
                 }
+
             }
 
             // set the last element color as white
