@@ -17,10 +17,10 @@ class Ele {
     }
  
     draw() {
-        // c.fillStyle = "#FF0000"
-        // c.fillRect(this.x, this.y, 40, this.val)
-        c.strokeStyle = this.color
-        c.strokeRect(this.x, this.y, 40, this.val)
+        c.fillStyle = this.color
+        c.fillRect(this.x + 10, this.y, 20, this.val)
+        // c.strokeStyle = this.color
+        //c.strokeRect(this.x + 10, this.y, 20, this.val)
     }
 
     // getters and setters for pos. to animate the swap
@@ -98,8 +98,8 @@ class SortingArray {
 
             for (j = i + 1; j < this.arr.length; j++) {
 
-                // reset the previous ele color as white
-                // but only if it isn't the ele that we're looking at in the outer loop
+                // reset the previous ele color as white, but
+                // only if it isn't the ele that we're looking at in the outer loop
                 // and if it isn't our min_indx
                 if (j - 1 !== i && j - 1 !== min_idx)
                     this.arr[j-1].color = 'white'
