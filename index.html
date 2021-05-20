@@ -11,13 +11,15 @@
         canvas {
             display: block;
             margin: 0 auto;
-            border: 2px solid #EAF6FF;
+            border: 2px solid white;
         }
     </style>
 </head>
 <body>
-    <button id="sortBtn">Sort</button>
     <canvas></canvas>
     <script src="index.js"></script>
+    <script src="./sorts/selection.js"></script>
+    <button onclick="sortArr.selectionSort()">Selection Sort</button>
+    <button onclick="">Insertion Sort</button>
 </body>
 </html>
