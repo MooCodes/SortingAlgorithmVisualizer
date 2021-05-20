@@ -7,12 +7,13 @@ canvas.height = 500
 
 // Representation of an element of the array (rectangles seen on the screen)
 class Ele {
-    constructor(val, x) {
+    constructor(val, x, c) {
         this.val = val
         this.height = val // the height of each ele
         this.x = x
         this.y = 0
         this.color = 'white'
+        this.c = c // canvas context
     }
  
     draw() {
@@ -37,18 +38,17 @@ class Ele {
     }
 }
 
-function SortArray() {
-    // creates a new array of Ele's
-    this.generateEleArray = () => Array(20).fill().map((x, i) => {
-        return new Ele(Math.round(Math.random() * (300 - 25) + 25), i * 40)
-    })
-
-    this.arr = this.generateEleArray() // the arr of eles
+function SortArray(c) {
+    this.c = c
+    this.running = false
+    this.arr = SortArray.generateEleArray() // the arr of eles
+    this.delayTime = 50
+    this.shouldDelay = true
 
     // draws each ele in the array
     this.draw = () => {
         // clear the screen
-        c.clearRect(0, 0, canvas.width, canvas.height)
+        this.c.clearRect(0, 0, canvas.width, canvas.height)
         // draw the array
         this.arr.forEach(ele => ele.draw())
     }
@@ -73,7 +73,8 @@ function SortArray() {
 
         this.draw()
 
-        await sleep(50)
+        if (this.shouldDelay)
+            await sleep(this.delayTime)
 
         this.arr[i].color = 'white'
         this.arr[j].color = 'green'
@@ -81,14 +82,47 @@ function SortArray() {
     }
 }
 
+SortArray.generateEleArray = function(c) {
+    // creates a new array of Ele's
+    return Array(20).fill().map((x, i) => {
+        return new Ele(Math.round(Math.random() * (300 - 25) + 25), i * 40, c)
+    })
+}
+
 // From: https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
 let sleep = (ms) => {
     return new Promise(r => setTimeout(r, ms))
 }
 
-const sortArr = new SortArray()
+const sortArr = new SortArray(c)
 
 console.log(sortArr)
+
+// wrappers around button logic
+
+const DisplayNewArray = async () => {
+    // if a sort is currently running,
+    // finish the sort by not having it sleep anymore
+    // and then wait a bit for it to finish completely
+    // in order to display a new array
+    if (sortArr.running) {
+        sortArr.shouldDelay = false
+        await sleep(50)
+        sortArr.shouldDelay = true
+    }
+
+    sortArr.arr = SortArray.generateEleArray(c)
+    sortArr.draw()
+}
+
+const SelectionSort = async () => {
+    // exit if already running
+    if (sortArr.running) return
+
+    sortArr.running = true
+    await sortArr.selectionSort()
+    sortArr.running = false
+}
 
 let init = () => {
     sortArr.draw()

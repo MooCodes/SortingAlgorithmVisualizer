@@ -19,7 +19,8 @@ SortArray.prototype.selectionSort = async function () {
             this.arr[j].color = 'red'
             this.draw()
 
-            await sleep(50)
+            if (this.shouldDelay)
+                await sleep(this.delayTime)
 
             // found smallest ele in subarray
             if (this.arr[j].val < this.arr[min_idx].val) {
