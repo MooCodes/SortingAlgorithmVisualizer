@@ -133,9 +133,14 @@ let init = () => {
 
 init()
 
+let generateArrayBtn = document.querySelector("#generateArray")
 let slider = document.querySelector("#slider")
 
-slider.onchange = (e) => {
+generateArrayBtn.onclick = () => {
+    DisplayNewArray(parseInt(slider.value))
+}
+
+slider.oninput = (e) => {
     console.log(e.target.value)
     DisplayNewArray(parseInt(e.target.value))
 }
