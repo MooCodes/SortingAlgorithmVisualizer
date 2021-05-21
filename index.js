@@ -2,23 +2,23 @@ const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
 // set canvas width/height
-canvas.width = 800
+canvas.width = 900
 canvas.height = 500
 
 // Representation of an element of the array (rectangles seen on the screen)
 class Ele {
-    constructor(val, x, c) {
+    constructor(val, x, width) {
         this.val = val
         this.height = val // the height of each ele
         this.x = x
         this.y = 0
-        this.color = 'white'
-        this.c = c // canvas context
+        this.color = 'black'
+        this.width = width
     }
  
     draw() {
         c.fillStyle = this.color
-        c.fillRect(this.x + 10, this.y, 20, this.val)
+        c.fillRect(this.x, this.y, this.width, this.val)
         // c.strokeStyle = this.color
         // c.strokeRect(this.x + 10, this.y, 20, this.val)
     }
@@ -38,17 +38,16 @@ class Ele {
     }
 }
 
-function SortArray(c) {
-    this.c = c
+function SortArray() {
     this.running = false
-    this.arr = SortArray.generateEleArray() // the arr of eles
+    this.arr = SortArray.generateEleArray(20) // the arr of eles
     this.delayTime = 50
     this.shouldDelay = true
 
     // draws each ele in the array
     this.draw = () => {
         // clear the screen
-        this.c.clearRect(0, 0, canvas.width, canvas.height)
+        c.clearRect(0, 0, canvas.width, canvas.height)
         // draw the array
         this.arr.forEach(ele => ele.draw())
     }
@@ -82,10 +81,12 @@ function SortArray(c) {
     }
 }
 
-SortArray.generateEleArray = function(c) {
+SortArray.generateEleArray = function(n) {
     // creates a new array of Ele's
-    return Array(20).fill().map((x, i) => {
-        return new Ele(Math.round(Math.random() * (300 - 25) + 25), i * 40, c)
+    console.log('creating array of size: ', n)
+    return Array(n).fill().map((x, i) => {
+        console.log('hi: ', i)
+        return new Ele(Math.round(Math.random() * (300 - 25) + 25), i * (canvas.width / n), canvas.width / (n * 2))
     })
 }
 
@@ -100,7 +101,7 @@ console.log(sortArr)
 
 // wrappers around button logic
 
-const DisplayNewArray = async () => {
+const DisplayNewArray = async (n) => {
     // if a sort is currently running,
     // finish the sort by not having it sleep anymore
     // and then wait a bit for it to finish completely
@@ -111,7 +112,9 @@ const DisplayNewArray = async () => {
         sortArr.shouldDelay = true
     }
 
-    sortArr.arr = SortArray.generateEleArray(c)
+    console.log('new n: ', n)
+
+    sortArr.arr = SortArray.generateEleArray(n)
     sortArr.draw()
 }
 
@@ -129,3 +132,10 @@ let init = () => {
 }
 
 init()
+
+let slider = document.querySelector("#slider")
+
+slider.onchange = (e) => {
+    console.log(e.target.value)
+    DisplayNewArray(parseInt(e.target.value))
+}

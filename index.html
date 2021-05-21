@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ali Baig Sorting Algorithm Visualizer</title>
     <style>
-        body {
-            background-color: #151E3F;
-        }
         canvas {
             display: block;
             margin: 0 auto;
@@ -17,10 +14,11 @@
 </head>
 <body>
     <canvas></canvas>
-    <script src="index.js"></script>
-    <script src="./sorts/selection.js"></script>
-    <button onclick="DisplayNewArray()">New Array</button>
+    <button onclick="DisplayNewArray(20)">New Array</button>
+    <input id="slider" type="range" min="20" max="120" value="20"> <!--size of the arr-->
     <button onclick="SelectionSort()">Selection Sort</button>
     <button onclick="">Insertion Sort</button>
+    <script src="index.js"></script>
+    <script src="./sorts/selection.js"></script>
 </body>
 </html>
