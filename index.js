@@ -12,29 +12,20 @@ class Ele {
         this.height = val // the height of each ele
         this.x = x
         this.y = 0
-        this.color = 'black'
+        this.color = '#6DD3CE'
         this.width = width
     }
  
     draw() {
+        // add shadow blur
+        // c.shadowBlur = 1
+        // c.shadowColor = 'black'
+
         c.fillStyle = this.color
         c.fillRect(this.x, this.y, this.width, this.val)
-        // c.strokeStyle = this.color
-        // c.strokeRect(this.x + 10, this.y, 20, this.val)
-    }
 
-    // getters and setters for pos. to animate the swap
-    get getX() {
-        return this.x
-    }
-    set setX(val) {
-        this.x = val
-    }
-    get getY() {
-        return this.y
-    }
-    set setY(val) {
-        this.y = val
+        // c.strokeStyle = 'black'
+        // c.strokeRect(this.x, this.y, this.width, this.val)
     }
 }
 
@@ -86,7 +77,7 @@ SortArray.generateEleArray = function(n) {
     console.log('creating array of size: ', n)
     return Array(n).fill().map((x, i) => {
         console.log('hi: ', i)
-        return new Ele(Math.round(Math.random() * (300 - 25) + 25), i * (canvas.width / n), canvas.width / (n * 2))
+        return new Ele(Math.round(Math.random() * (300 - 25) + 25), i * ((canvas.width / n)), canvas.width / (n * 1.1))
     })
 }
 
@@ -141,6 +132,5 @@ generateArrayBtn.onclick = () => {
 }
 
 slider.oninput = (e) => {
-    console.log(e.target.value)
     DisplayNewArray(parseInt(e.target.value))
 }

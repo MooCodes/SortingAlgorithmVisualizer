@@ -5,17 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ali Baig Sorting Algorithm Visualizer</title>
     <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            background-color: #fff;
+        }
         canvas {
             display: block;
             margin: 0 auto;
-            border: 2px solid white;
+        }
+        #toolbar {
+            display: flex;
+            width: 100%;
+            background-color: #495867;
+            height: 100px;
+        }
+        #generateArray {
+            color: white;
+            margin: 35px;
+        }
+        #seperator {
+            border-left: 2px solid white;
+            height: 50px;
+            margin-top: 20px;
+        }
+        #slider-wrapper {
+            color: white;
+            display: flex;
+        }
+        #slider-msg {
+            margin-top: 35px;
+            margin-left: 35px;
+            margin-bottom: 35px;
+        }
+        #slider {
+            margin-bottom: 10px;
+            margin-left: 10px;
+            margin-right: 35px;
+        }
+        #selectionSort {
+            color: white;
+            margin: 35px;
         }
     </style>
 </head>
 <body>
+    <div id="toolbar">
+        <div id="generateArray">Generate New Array</div>
+        <div id="seperator"></div>
+        <div id="slider-wrapper">
+            <div id="slider-msg">Change Array Size & Sorting Speed</div>
+            <input id="slider" type="range" min="20" max="120" value="20"> <!--size of the arr-->
+        </div>
+        <div id="seperator"></div>
+        <div id="selectionSort">Selection Sort</div>
+        <div id="selectionSort">Selection Sort</div>
+    </div>
     <canvas></canvas>
-    <button id="generateArray">New Array</button>
-    <input id="slider" type="range" min="20" max="120" value="20"> <!--size of the arr-->
+    <!-- <button id="generateArray">New Array</button> -->
     <button onclick="SelectionSort()">Selection Sort</button>
     <button onclick="">Insertion Sort</button>
     <script src="index.js"></script>
