@@ -23,6 +23,10 @@
         #generateArray {
             color: white;
             margin: 35px;
+            cursor: pointer;
+        }
+        #generateArray:hover {
+            color: grey;
         }
         #seperator {
             border-left: 2px solid white;
@@ -42,10 +46,15 @@
             margin-bottom: 10px;
             margin-left: 10px;
             margin-right: 35px;
+            width: 150px;
         }
         #selectionSort {
             color: white;
-            margin: 35px;
+            margin: 35px 0 35px 35px;
+            cursor: pointer;
+        }
+        #selectionSort:hover {
+            color: grey;
         }
     </style>
 </head>
@@ -54,12 +63,12 @@
         <div id="generateArray">Generate New Array</div>
         <div id="seperator"></div>
         <div id="slider-wrapper">
-            <div id="slider-msg">Change Array Size & Sorting Speed</div>
+            <div id="slider-msg">Adjust Array Size & Sorting Speed</div>
             <input id="slider" type="range" min="20" max="120" value="20"> <!--size of the arr-->
         </div>
         <div id="seperator"></div>
         <div id="selectionSort">Selection Sort</div>
-        <div id="selectionSort">Selection Sort</div>
+        <div id="selectionSort">Insertion Sort</div>
     </div>
     <canvas></canvas>
     <!-- <button id="generateArray">New Array</button> -->

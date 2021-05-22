@@ -14,6 +14,7 @@ class Ele {
         this.y = 0
         this.color = '#6DD3CE'
         this.width = width
+        this.baseColor = '#6DD3CE'
     }
  
     draw() {
@@ -24,8 +25,8 @@ class Ele {
         c.fillStyle = this.color
         c.fillRect(this.x, this.y, this.width, this.val)
 
-        // c.strokeStyle = 'black'
-        // c.strokeRect(this.x, this.y, this.width, this.val)
+        c.strokeStyle = 'black'
+        c.strokeRect(this.x, this.y, this.width, this.val)
     }
 }
 
@@ -66,8 +67,8 @@ function SortArray() {
         if (this.shouldDelay)
             await sleep(this.delayTime)
 
-        this.arr[i].color = 'white'
-        this.arr[j].color = 'green'
+        this.arr[i].color = '#6DD3CE'
+        this.arr[j].color = 'purple'
         this.draw()
     }
 }
@@ -124,8 +125,11 @@ let init = () => {
 
 init()
 
-let generateArrayBtn = document.querySelector("#generateArray")
-let slider = document.querySelector("#slider")
+const generateArrayBtn = document.querySelector("#generateArray")
+const slider = document.querySelector("#slider")
+const selectionSortBtn = document.querySelector("#selectionSort")
+selectionSortBtn.onclick = () => SelectionSort()
+
 
 generateArrayBtn.onclick = () => {
     DisplayNewArray(parseInt(slider.value))

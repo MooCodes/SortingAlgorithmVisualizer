@@ -10,11 +10,11 @@ SortArray.prototype.selectionSort = async function () {
 
         for (j = i + 1; j < this.arr.length; j++) {
 
-            // reset the previous ele color as white, but
+            // reset the previous ele color as base color, but
             // only if it isn't the ele that we're looking at in the outer loop
             // and if it isn't our min_indx
             if (j - 1 !== i && j - 1 !== min_idx)
-                this.arr[j - 1].color = 'white'
+                this.arr[j - 1].color = '#6DD3CE'
 
             this.arr[j].color = 'red'
             this.draw()
@@ -29,7 +29,7 @@ SortArray.prototype.selectionSort = async function () {
                     this.arr[j].color = 'blue'
                     this.draw()
                 } else {
-                    this.arr[min_idx].color = 'white'
+                    this.arr[min_idx].color = '#6DD3CE'
                     this.arr[j].color = 'blue'
                     this.draw()
                 }
@@ -41,7 +41,7 @@ SortArray.prototype.selectionSort = async function () {
         }
 
         // set the last element color as white
-        this.arr[this.arr.length - 1].color = 'white'
+        this.arr[this.arr.length - 1].color = '#6DD3CE'
         this.draw()
 
         // swap
@@ -53,7 +53,7 @@ SortArray.prototype.selectionSort = async function () {
     console.log('finished selection sort')
 
     // set the last element color as sorted color
-    this.arr[this.arr.length - 1].color = 'green'
+    this.arr[this.arr.length - 1].color = 'purple'
     this.draw()
 
 }
