@@ -56,6 +56,10 @@
         #selectionSort:hover {
             color: grey;
         }
+        div[disabled] {
+            pointer-events: none;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
@@ -64,7 +68,7 @@
         <div id="seperator"></div>
         <div id="slider-wrapper">
             <div id="slider-msg">Adjust Array Size & Sorting Speed</div>
-            <input id="slider" type="range" min="20" max="120" value="20"> <!--size of the arr-->
+            <input id="slider" type="range" min="20" max="120" value="70"> <!--size of the arr-->
         </div>
         <div id="seperator"></div>
         <div id="selectionSort">Selection Sort</div>

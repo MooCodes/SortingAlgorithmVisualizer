@@ -25,16 +25,43 @@ class Ele {
         c.fillStyle = this.color
         c.fillRect(this.x, this.y, this.width, this.val)
 
-        c.strokeStyle = 'black'
-        c.strokeRect(this.x, this.y, this.width, this.val)
+        // c.strokeStyle = 'black'
+        // c.strokeRect(this.x, this.y, this.width, this.val)
     }
 }
 
-function SortArray() {
+function SortArray(n) {
     this.running = false
-    this.arr = SortArray.generateEleArray(20) // the arr of eles
-    this.delayTime = 50
-    this.shouldDelay = true
+    this.sleepTime = 5
+    this.shouldSleep = true
+    this.size = n
+
+    // sets the appropriate delayTime depending on the size of array
+    this.calculateSleepTime = () => {
+        if (this.size < 30)
+            this.sleepTime = 50
+        else if (this.size < 60)
+            this.sleepTime = 25
+        else if (this.size < 90)
+            this.sleepTime = 5
+        else
+            this.sleepTime = 1
+    }
+
+    this.generateEleArray = function (n) {
+        // creates a new array of Ele's
+        this.size = n // update size
+        this.calculateSleepTime()
+        console.log('creating array of size: ', n)
+
+        // define the arr
+        this.arr = Array(n).fill().map((x, i) => {
+            console.log('hi: ', i)
+            return new Ele(Math.round(Math.random() * (300 - 25) + 25), i * ((canvas.width / n)), canvas.width / (n * 1.1))
+        })
+    }
+
+    this.generateEleArray(n) // the arr of eles of size n
 
     // draws each ele in the array
     this.draw = () => {
@@ -64,49 +91,37 @@ function SortArray() {
 
         this.draw()
 
-        if (this.shouldDelay)
-            await sleep(this.delayTime)
+        if (this.shouldSleep)
+            await sleep(this.sleepTime)
 
         this.arr[i].color = '#6DD3CE'
         this.arr[j].color = 'purple'
         this.draw()
     }
+
 }
 
-SortArray.generateEleArray = function(n) {
-    // creates a new array of Ele's
-    console.log('creating array of size: ', n)
-    return Array(n).fill().map((x, i) => {
-        console.log('hi: ', i)
-        return new Ele(Math.round(Math.random() * (300 - 25) + 25), i * ((canvas.width / n)), canvas.width / (n * 1.1))
-    })
-}
 
 // From: https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
 let sleep = (ms) => {
     return new Promise(r => setTimeout(r, ms))
 }
 
-const sortArr = new SortArray(c)
+const sortArr = new SortArray(70)
 
-console.log(sortArr)
+const init = () => {
+    sortArr.draw()
+}
+
+init()
 
 // wrappers around button logic
 
 const DisplayNewArray = async (n) => {
-    // if a sort is currently running,
-    // finish the sort by not having it sleep anymore
-    // and then wait a bit for it to finish completely
-    // in order to display a new array
-    if (sortArr.running) {
-        sortArr.shouldDelay = false
-        await sleep(50)
-        sortArr.shouldDelay = true
-    }
+    // don't generate new arr if a sort is currently running,
+    if (sortArr.running) return
 
-    console.log('new n: ', n)
-
-    sortArr.arr = SortArray.generateEleArray(n)
+    sortArr.generateEleArray(n)
     sortArr.draw()
 }
 
@@ -114,22 +129,35 @@ const SelectionSort = async () => {
     // exit if already running
     if (sortArr.running) return
 
+    // disable buttons
     sortArr.running = true
     await sortArr.selectionSort()
     sortArr.running = false
 }
 
-let init = () => {
-    sortArr.draw()
-}
-
-init()
-
 const generateArrayBtn = document.querySelector("#generateArray")
 const slider = document.querySelector("#slider")
+const sliderMsg = document.querySelector("#slider-msg")
 const selectionSortBtn = document.querySelector("#selectionSort")
-selectionSortBtn.onclick = () => SelectionSort()
+let buttons = [generateArrayBtn, slider, sliderMsg, selectionSortBtn]
 
+let disableButtons = (cond) => {
+    if (cond)
+        buttons.forEach(btn => btn.setAttribute('disabled', ''))
+    else
+        buttons.forEach(btn => btn.removeAttribute('disabled', ''))
+}
+
+selectionSortBtn.onclick = async () => {
+    // disable the buttons
+    disableButtons(true)
+    console.log('disabled buttons')
+
+    await SelectionSort()
+
+    // renable buttons
+    disableButtons(false)
+}
 
 generateArrayBtn.onclick = () => {
     DisplayNewArray(parseInt(slider.value))
