@@ -36,7 +36,7 @@ function SortArray(n) {
     this.shouldSleep = true
     this.size = n
 
-    // sets the appropriate delayTime depending on the size of array
+    // sets the appropriate time in ms for the sort to sleep
     this.calculateSleepTime = () => {
         if (this.size < 30)
             this.sleepTime = 50
