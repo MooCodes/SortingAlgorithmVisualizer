@@ -25,6 +25,7 @@ class Ele {
         c.fillStyle = this.color
         c.fillRect(this.x, this.y, this.width, this.val)
 
+        // add outline
         // c.strokeStyle = 'black'
         // c.strokeRect(this.x, this.y, this.width, this.val)
     }
