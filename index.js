@@ -130,9 +130,16 @@ const SelectionSort = async () => {
     // exit if already running
     if (sortArr.running) return
 
-    // disable buttons
     sortArr.running = true
     await sortArr.selectionSort()
+    sortArr.running = false
+}
+
+const MergeSort = async () => {
+    if (sortArr.running) return
+
+    sortArr.running = true
+    await sortArr.mergeSort()
     sortArr.running = false
 }
 
@@ -140,7 +147,8 @@ const generateArrayBtn = document.querySelector("#generateArray")
 const slider = document.querySelector("#slider")
 const sliderMsg = document.querySelector("#slider-msg")
 const selectionSortBtn = document.querySelector("#selectionSort")
-let buttons = [generateArrayBtn, slider, sliderMsg, selectionSortBtn]
+const mergeSortBtn = document.querySelector("#mergeSort")
+let buttons = [generateArrayBtn, slider, sliderMsg, selectionSortBtn, mergeSortBtn]
 
 let disableButtons = (cond) => {
     if (cond)
@@ -152,9 +160,18 @@ let disableButtons = (cond) => {
 selectionSortBtn.onclick = async () => {
     // disable the buttons
     disableButtons(true)
-    console.log('disabled buttons')
 
     await SelectionSort()
+
+    // renable buttons
+    disableButtons(false)
+}
+
+mergeSortBtn.onclick = async () => {
+    // disable the buttons
+    disableButtons(true)
+
+    await MergeSort()
 
     // renable buttons
     disableButtons(false)

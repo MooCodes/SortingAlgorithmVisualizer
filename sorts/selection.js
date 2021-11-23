@@ -52,7 +52,7 @@ SortArray.prototype.selectionSort = async function () {
 
     console.log('finished selection sort')
 
-    // set the last element color as sorted color
+    // set the last element color as sorted color --> purple color means sorted ele
     this.arr[this.arr.length - 1].color = 'purple'
     this.draw()
 
