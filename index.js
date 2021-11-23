@@ -36,6 +36,7 @@ function SortArray(n) {
     this.sleepTime = 5
     this.shouldSleep = true
     this.size = n
+    this.canvas = canvas
 
     // sets the appropriate time in ms for the sort to sleep
     this.calculateSleepTime = () => {
