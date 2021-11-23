@@ -34,35 +34,40 @@ SortArray.prototype.merge = async function(arr, low, mid, hi) {
 
     while (i < n1 && j < n2) {
         if (L[i].val <= R[j].val) {
-            //arr[k].val = L[i].val
             arr[k] = L[i]
             i++
         } else {
-            //arr[k].val = R[j].val
             arr[k] = R[j]
             j++
         }
         arr[k].x = (k * (this.canvas.width / arr.length))
-        // draw here potentially (updated x pos.)
+        // // draw here potentially (updated x pos.)
+        arr[k].color = 'purple'
+        this.draw()
         k++
+        await sleep(this.sleepTime)
     }
 
     while (i < n1) {
-        //arr[k].val = L[i].val
         arr[k] = L[i]
         arr[k].x = (k * (this.canvas.width / arr.length))
-        // draw here potentially (updated x pos.)
+        // // draw here potentially (updated x pos.)
+        arr[k].color = 'purple'
+        this.draw()
         i++
         k++
+        await sleep(this.sleepTime)
     }
 
     while (j < n2) {
-        //arr[k].val = R[j].val
         arr[k] = R[j]
         arr[k].x = (k * (this.canvas.width / arr.length))
-        // draw here potentially (updated x pos.)
+        // // draw here potentially (updated x pos.)
+        arr[k].color = 'purple'
+        this.draw()
         j++
         k++
+        await sleep(this.sleepTime)
     }
 
 }
